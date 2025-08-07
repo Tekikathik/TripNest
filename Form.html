@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="prompt.css"> -->
+</head>
+<style>
+
+    body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100svw;
+            height: 100svh;
+        }
+
+        #main {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            /* display: none; */
+            /* overflow: hidden; */
+        }
+
+        #loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: none;
+            /* justify-content: center;
+      align-items: center; */
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #content {
+            display: none;
+            padding: 20px;
+        }
+
+        .logo-container-s2 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            /* Aligns logo icon and text to the left // Space between logo and the "About Us" heading */
+            /* No need for width: 100% here directly, as parent aligns it */
+            margin-left: 20px;
+        }
+
+        .tripnest-icon-s2 {
+            height: 7.0rem;
+            width: 7.0rem;
+            margin-right: -1.2rem;
+            object-fit: contain;
+        }
+
+        .tripnest-text-logo-s2 {
+            height: 1.8rem;
+            object-fit: contain;
+            position: relative;
+            top: 16px;
+        }
+
+        nav {
+            display: flex;
+            height: 12%;
+            position: sticky;
+            top: 0px;
+            background-color: rgb(255, 255, 255);
+            width: 100%;
+            z-index: 1;
+
+            animation: navbar 2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .home,
+        .Planner,
+        .AboutUs,
+        .Signin {
+            width: 90px;
+            height: 35px;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 10px;
+            cursor: pointer;
+
+        }
+
+        .Signin {
+            background-color: #7AB2D3;
+        }
+
+        .Signin:hover {
+            background-color: #4A628a;
+        }
+
+        .sidebar {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            width: 80%;
+            gap: 60px;
+        }
+
+        .sidebar button {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: none;
+            font-size: medium;
+            font-weight: bold;
+
+        }
+
+        .Signin:hover {
+            background-color: #4A628a;
+            color: white;
+        }
+
+        .sidebar button:hover {
+            color: white;
+            /* background-color: transparent; */
+        }
+
+        .home:hover,
+        .Planner:hover,
+        .AboutUs:hover {
+            background-color: #7AB2D3;
+            color: white;
+            border-radius: 15px;
+        }
+
+        .three_dot {
+            display: none;
+            justify-content: end;
+            align-items: center;
+            width: 90%;
+            font-size: 30px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width:767px) {
+            .three_dot {
+                display: flex;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+        }
+
+        @media (max-width:768px) {
+            .sidebar {
+                gap: 20px;
+            }
+
+        }
+
+        @media (max-width:769px) {
+
+            .tripnest-icon-s2 {
+                width: 50%;
+            }
+
+            .tripnest-text-logo-s2 {
+                width: 40%;
+            }
+        }
+
+        .mobile {
+            width: 50%;
+            height: 350px;
+            background-color: white;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            display: none;
+            flex-direction: column;
+            border-radius: 20px;
+            margin: 10px;
+            gap: 10px;
+        }
+
+        .mobile div {
+            width: 60%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            margin-left: 50px;
+        }
+
+        .mobile div img {
+            padding-top: 10px;
+        }
+
+        .mobile button {
+            width: 60%;
+            height: 20%;
+            background-color: transparent;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .mobile div:hover {
+            background-color: #7AB2D3;
+
+        }
+
+        .mobile .cross {
+            width: 90%;
+            display: flex;
+            justify-content: end;
+            font-size: 50px;
+            margin-top: 20px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        @media (min-width:426px) {
+            .mobile {
+                display: none;
+            }
+        }
+
+        .mobile .services {
+            margin-bottom: 20px;
+        }
+
+        .main-div {
+            width: 100%;
+            height: 100%;
+            background-color: #7AB2D3;
+            background: url('/assests//background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .form-container {
+            background-color: rgb(135, 206, 250);
+            /* backdrop-filter: blur(4px); */
+            padding: 2rem;
+            /* p-8 */
+            border-radius: 1rem;
+            /* rounded-2xl */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            /* shadow-2xl */
+            width: 100%;
+            /* height: 100%; */
+            max-width: 28rem;
+            /* max-w-md */
+            /* margin: 50px; */
+            /* z-index: -1; */
+        }
+
+        /* From/To Input Group */
+        .from-to-group {
+            /* background-color: #ffffff;
+            border-radius: 0.75rem;
+            
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            
+            overflow: hidden; */
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .from-to-group .input-row:first-child {
+            /* border-bottom: 1px solid #e5e7eb; */
+            /* border-b border-gray-200 */
+            /* padding-bottom: 1rem; */
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* General Input Styles */
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        /* Text inputs inside the From/To group */
+        .from-to-group input[type="text"] {
+            width: 100%;
+            padding: 1rem;
+            /* p-4 */
+            padding-top: 1.25rem;
+            /* Add more top padding */
+            padding-bottom: 1.25rem;
+            background-color: transparent;
+            color: #374151;
+            /* text-gray-700 */
+            border: none;
+            outline: none;
+            /* border-bottom: 1px solid #e5e7eb; */
+        }
+
+        .input-section {
+            background-color: #ffffff;
+            /* White background for each input section */
+            border-radius: 0.75rem;
+            /* Rounded corners for each input section */
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            /* Inner shadow for each */
+            margin-bottom: 0.75rem;
+            /* This creates the visual gap between "From" and "To" */
+            /* Adjust this value (e.g., 0.5rem, 1rem) as needed */
+            overflow: hidden;
+            /* Keep overflow hidden for rounded corners */
+        }
+
+        .input-section .input-row input[type="text"] {
+            width: 100%;
+            padding: 1.25rem 1rem;
+            /* Existing padding for text inside input */
+            background-color: transparent;
+            color: #374151;
+            border: none;
+            /* No border directly on input */
+            outline: none;
+        }
+
+
+        .from-to-group input[type="text"]::placeholder {
+            color: #6b7280;
+            /* placeholder-gray-500 */
+        }
+
+        .from-to-group .input-row:first-child input[type="text"] {
+            border-bottom: 1px solid #e5e7eb;
+            /* Apply border ONLY to the "From" input */
+        }
+
+        /* 4. Ensure the "To" input doesn't pick up any unwanted borders (though the above should prevent it) */
+        .from-to-group .input-row:last-child input[type="text"] {
+            border-bottom: none;
+            /* Explicitly ensure no bottom border on "To" input */
+        }
+
+        /* Icon Styles */
+        .icon-wrapper {
+            padding: 1rem;
+            /* p-4 for top group, p-3 for others */
+            color: #6b7280;
+            /* text-gray-500 */
+        }
+
+        .icon-wrapper svg {
+            height: 1.5rem;
+            /* h-6 */
+            width: 1.5rem;
+            /* w-6 */
+        }
+
+        /* Labeled Input Rows (Date and Duration) */
+        .labeled-input-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+        }
+
+        .labeled-input-row:last-of-type {
+            margin-bottom: 2rem;
+            /* mb-8 */
+        }
+
+        .labeled-input-row label {
+            color: #eef1f4;
+            /* text-gray-700 */
+            font-size: 20px;
+            margin-right: 1rem;
+            /* mr-4 */
+            white-space: nowrap;
+            font-weight: bold;
+            /* font-medium */
+        }
+
+        .labeled-input-row input {
+            width: 100%;
+            padding: 0.75rem;
+            /* p-3 */
+            border: 1px solid #d1d5db;
+            /* border border-gray-300 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            transition: all 0.2s ease-in-out;
+        }
+
+        .labeled-input-row input::placeholder {
+            color: #6b7280;
+            /* placeholder-gray-500 */
+        }
+
+        .labeled-input-row input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3b82f6;
+            /* focus:ring-2 focus:ring-blue-500 */
+            border-color: #3b82f6;
+        }
+
+        /* Submit Button */
+        #submit-btn {
+            width: 100%;
+            background-color: #5db4e6;
+            font-size: 20px;
+            /* bg-gray-700 */
+            color: white;
+            font-weight: 700;
+            /* font-bold */
+            padding: 0.75rem 1rem;
+            /* py-3 px-4 */
+            border: none;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* shadow-lg */
+        }
+
+        #submit-btn:hover {
+            background-color: #1f2937;
+            /* hover:bg-gray-800 */
+        }
+
+        #submit-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.5);
+            /* focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 */
+        }
+
+        /* Style for the date input to show placeholder text */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.6;
+            filter: invert(0.5);
+        }
+
+        input[type="date"]:required:invalid::-webkit-datetime-edit {
+            color: transparent;
+        }
+
+        input[type="date"]:focus::-webkit-datetime-edit {
+            color: black !important;
+        }
+
+        .main-div .hlo {
+            height: 100%;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width:769px) {
+            .main-div .hlo {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        @media (max-width:376px) {
+            #journey-date {
+                width: 80px;
+            }
+        }
+        .loder{
+            height:100%;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+           
+        }
+        .loading{
+            height: 90%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .loading video{
+            height:200px;
+            width: 200px;
+            
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo-container-s2">
+                <img src="/assests/logo (2).png" alt="TripNest Icon" class="tripnest-icon-s2">
+                <img src="/assests/TripNest.png" alt="TripNest Text Logo" class="tripnest-text-logo-s2">
+            </div>
+            <div class="sidebar">
+                <div class="home"><button>Home</button></div>
+                <div class="Planner"><button>Planner</button></div>
+                <div class="AboutUs"><button>AboutUs</button></div>
+                <div class="Signin"><button>Signin</button></div>
+            </div>
+            <div class="three_dot" onclick="funn()">&#9776;</div>
+            <div class="mobile">
+                <span class="cross" onclick="fun()">&times;</span>
+                <div class="home"><img src="/assests/home_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png"
+                        alt=""><button>Home</button></div>
+                <div class="products"><img src="/assests/map_pin_review_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png"
+                        alt=""><button>Planner</button></div>
+                <div class="aboutus"><img src="/assests/page_footer_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png"
+                        alt=""><button>AboutUs</button></div>
+                <div class="services"><img src="/assests/login_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png"
+                        alt=""><button>Signin</button></div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-div">
+            <div class="hlo">
+                <div class="form-container">
+                    <div class="input-section">
+                        <div class="input-row">
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                            </div>
+                            <input type="text" placeholder="From" id="from">
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div class="input-row">
+                            <div class="icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                            <input type="text" placeholder="To" id="to">
+                        </div>
+                    </div>
+
+                    <div class="labeled-input-row">
+                        <label for="journey-date">Journey Date:</label>
+                        <input type="date" id="journey-date" required>
+                    </div>
+
+                    <div class="labeled-input-row">
+                        <label for="days">Days:</label>
+                        <input type="number" id="days" placeholder="Enter number of days" min="1">
+                    </div>
+
+                    <button id="submit-btn">Start Journey</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div id="loder">
+        <div class="loading" >
+            <video autoplay muted loop playsinline>
+                <source src="/assests/loading.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- <div class="title">Loading, Please wait a moment...</div> -->
+    </div>
+   
+  <script>
+ function loading(){
+    console.log("hhfhjfbjfnjnfnfn")
+     document.getElementById("main").style="display:none";
+ document.getElementById("loder").style="display:flex";
+  }
+
+
+const image_url = [
+  "https://plus.unsplash.com/premium_photo-1661885523029-fc960a2bb4f3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1713729991304-d0b6c328560e?q=80&w=1386&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1661912874572-3195ceee2e7c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1536289444758-1a89cd14499e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1609951586237-4c6bdb4f5133?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1661962542692-4fe7a4ad6b54?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1616388969587-8196f32388b4?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1564329494258-3f72215ba175?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697730429201-381b71f61427?q=80&w=1227&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1571679654681-ba01b9e1e117?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1656311882834-e5e7909f5fcf?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1622779100968-f38ad2954a0d?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1661963646501-7c2818380948?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1672343567686-33e271df060d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1523428461295-92770e70d7ae?q=80&w=695&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1593693411515-c20261bcad6e?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729438401-fcb4ff66d9a8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1620752379811-8ee714b283e4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1620752379811-8ee714b283e4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729422411-a2553ae5bd0d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1609670289875-590e8ec05c88?q=80&w=734&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1477735392287-289ae08ee862?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1517427677506-ade074eb1432?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729591806-66643a0c79de?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1614056965546-42fbe24eb36c?q=80&w=2129&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1614056965546-42fbe24eb36c?q=80&w=2129&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729865428-720962b67655?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1596177802441-e71d2d061d30?q=80&w=1075&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729448930-6b2187ac9ee4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729448930-6b2187ac9ee4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729448930-6b2187ac9ee4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729448930-6b2187ac9ee4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1615874226138-b37fcf3d75b2?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1615874226138-b37fcf3d75b2?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1615874226138-b37fcf3d75b2?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1615874226138-b37fcf3d75b2?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729693552-40448c8042fb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1612106268642-a14ba058aa64?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729438410-d53c666e3810?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1701836714155-6ecea1efbd64?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1696355168974-efb23054a39d?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1691348293238-a5974ac44619?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729442768-b170166665f8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1711213770108-16c706e6acdc?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1661904165347-369200d4bf72?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729584915-bf08db03ba19?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1688781298681-ae1f2d470b31?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1685085329768-1a9f5ff11d90?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1685085329768-1a9f5ff11d90?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697730332011-11f027c6aa60?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1602003953336-6e7adb3d0b19?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1600941393513-a5224603246a?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1643541930842-25f95aa30ff1?q=80&w=685&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1709967884183-7ffa9d168508?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1624554305378-0f440dd3a8c1?q=80&w=1125&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1624554305378-0f440dd3a8c1?q=80&w=1125&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1718799336662-1188f42e75ad?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697730411164-ed2cb32a7e87?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697730411164-ed2cb32a7e87?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697730411164-ed2cb32a7e87?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1629200711355-e0cab993b5d0?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729582875-7c1370666902?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729582875-7c1370666902?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1705592360345-1cd173c8b345?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697730342875-3788c28451cd?q=80&w=2096&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1705851965879-b3120ecdc95c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729640715-b4f8b691b9ce?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1697729640715-b4f8b691b9ce?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+];
+
+localStorage.setItem(`Image_url`,JSON.stringify(image_url));
+
+
+
+
+
+
+    function fun(){
+        document.getElementsByClassName("mobile")[0].style="display: none;"
+    }
+    function funn(){
+        document.getElementsByClassName("mobile")[0].style="display: flex; right:0px;"
+    }
+   let from=document.getElementById("from")
+    let to=document.getElementById("to")
+    let date= document.getElementById("journey-date")
+    let duration=document.getElementById("days")
+    let btn = document.getElementById("submit-btn")
+
+        btn.addEventListener("click",()=>{
+        if(!from.value || !to.value || !date.value || !duration.value){
+            alert("Please fill all details....")
+            return
+        }
+        else{
+        console.log(from.value)
+        console.log(to.value)
+        console.log(date.value)
+        console.log(duration.value)
+        GenerateResponse()
+        from.value=""
+        to.value=""
+        date.value=""
+        duration.value=""
+        }
+    })
+ 
+ const API_url="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=[YOURKEY]"
+
+async function GenerateResponse() {
+    //let text=ai_chat.querySelector(".ai-chat");
+    let user = {
+  data: `Give me a JSON object of all tourist places (minimum 6 places mandatory) located between ${from.value}and ${to.value} , specifically along the roadway or railway route.For each place, include: image URL (generate it) and give the url , Name of the place, Location name,  Location with latitude and longitude, A short description, The famous food of that place, A rating out of 5, A seasonal recommendation like “Best to visit in current monsoon”
+Format the response strictly like this, without any extra words: -  "places": [
+  {
+    "OriginLocation" { latitude": 0.0, "longitude": 0.0 }
+    "DestinationLocation" { latitude": 0.0, "longitude": 0.0 }
+    "imageurl": "",
+    "name": "",
+    "location": { "name":"", latitude": 0.0, "longitude": 0.0 },
+    "description": "",
+    "famous_food": "",
+    "rating": 0,
+    "best_season": ""
+  }
+]`
+};
+    let requestText = user.data;
+
+    let Request_opt={
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({
+            "contents":[{
+        "parts": [
+          {
+            "text": requestText
+          }
+        ]
+      }]
+    })
+    }
+   try{
+    //loading();
+    document.getElementById("main").style="display:none";
+ document.getElementById("loder").style="display:flex";
+
+     let response = await fetch(API_url,Request_opt);
+     console.log(response.status)
+     let data=await response.json();
+     let rawText = data.candidates[0].content.parts[0].text;
+    //  try {
+    //   parsed = JSON.parse(rawText); // only works if Gemini returns strict JSON
+    // } catch (e) {
+      //console.warn("Not strict JSON. Trying to extract JSON manually...");
+     let jsonStart = rawText.indexOf('{');
+      let jsonEnd = rawText.lastIndexOf('}') + 1;
+      let jsonText = rawText.slice(jsonStart, jsonEnd);
+      parsed = JSON.parse(jsonText);
+    // }
+    let i=0;
+     parsed.places.forEach(place => {
+       
+      console.log("Image URL:",place.imageurl)
+      console.log("Name:", place.name);
+      console.log("Location",JSON.stringify(place.location))
+      console.log("Location Name: ",place.location.name)
+      console.log("Location: Lat:", parseFloat(place.location.latitude), "Lng:", parseFloat(place.location.longitude));
+      console.log("Description:", place.description);
+      console.log("Famous food: ",place.famous_food);
+      console.log("Rating: ",place.rating);
+      console.log("Best Season: ",place.best_season);
+      console.log("--------------------------------------------------");
+      localStorage.setItem(`OriginLat`,place.OriginLocation.latitude)
+      localStorage.setItem(`OriginLng`,place.OriginLocation.longitude)
+      localStorage.setItem(`DestinationLat`,place.DestinationLocation.latitude)
+      localStorage.setItem(`DestinationLng`,place.DestinationLocation.longitude)
+      localStorage.setItem(`Image URL${i}`,place.imageurl)
+      localStorage.setItem(`Name${i}`,place.name)
+      localStorage.setItem(`Location${i}`,JSON.stringify(place.location))
+      // localStorage.setItem(`Lng${i}`,place.location.longitude)
+      localStorage.setItem(`Description${i}`,place.description)
+      localStorage.setItem(`Famous food${i}`,place.famous_food)
+      localStorage.setItem(`Rating${i}`,place.rating)
+      localStorage.setItem(`Best Season${i}`,place.best_season)
+      i++
+
+    });
+
+  } catch (error) {
+    console.error("No inseresting places");
+  }
+  finally{
+  window.location.href="Recommendation.html"
+  }
+  
+}
+
+
+  </script>
+ <!-- <script src="app.js"></script> -->
+</body>
+</html>

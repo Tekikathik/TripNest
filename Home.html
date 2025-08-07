@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripNest - Sections with Images (Pure CSS)</title>
+    <link rel="stylesheet" href="page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        /* Ensure HTML and Body always take full width */
+        min-width: 320px;
+        /* Prevent shrinking below this point */
+        overflow-x: hidden;
+        /* Hide horizontal scrollbar if it still appears */
+        box-sizing: border-box !important;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9fafb;
+        /* Equivalent to bg-gray-50 */
+        color: #374151;
+        /* Equivalent to text-gray-800 */
+        overflow-x: hidden;
+        /* Prevent horizontal scroll */
+        width: 100svw;
+        height: 100svh;
+        min-width: 320px;
+    }
+
+    /* --- Section 1: The World Is Waiting Start Planning --- */
+    .cta-background-image {
+        background-image: url('/assests/mount-everest-aerial-view-himalayas-istock-3745.jpg');
+        background-size: cover;
+        /* Cover the entire area */
+        background-position: center;
+        /* Center the image */
+        /* background-repeat: no-repeat; */
+        position: relative;
+        height: 600px;
+        /* Fixed height, adjust as needed */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        /* Equivalent to p-4 */
+        margin-top: 120px;
+    }
+
+    /* Overlay for the background image to make text more readable */
+    .cta-background-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        /* Dark overlay */
+        z-index: 0;
+    }
+
+    .cta-card {
+        position: relative;
+        z-index: 10;
+        /* Equivalent to z-10 */
+        background-color: rgba(255, 255, 255, 0.3);
+        /* Equivalent to bg-white bg-opacity-30 */
+        backdrop-filter: blur(10px);
+        /* Equivalent to backdrop-filter: blur(10px) */
+        -webkit-backdrop-filter: blur(10px);
+        /* For Safari */
+        border-radius: 0.75rem;
+        /* Equivalent to rounded-xl */
+        padding: 2rem;
+        /* Equivalent to p-8 */
+        max-width: 42rem;
+        /* Equivalent to max-w-2xl */
+        text-align: center;
+        /* Equivalent to text-center */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        /* Equivalent to shadow-lg */
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        /* Equivalent to border border-white border-opacity-40 */
+
+    }
+
+    .cta-headline {
+        font-size: 2.25rem;
+        /* Equivalent to text-3xl */
+        font-weight: 700;
+        /* Equivalent to font-bold */
+        color: #4A6286;
+        /* Equivalent to text-gray-900 */
+        margin-bottom: 1rem;
+        /* Equivalent to mb-4 */
+        line-height: 1.25;
+        /* Equivalent to leading-tight */
+    }
+
+    .cta-subtext {
+        font-size: 1rem;
+        /* Equivalent to text-base */
+        color: black;
+        /* Equivalent to text-gray-700 */
+        margin-bottom: 2rem;
+        /* Equivalent to mb-8 */
+    }
+
+    .cta-button {
+        background-color: #7AB2D3;
+        /* Equivalent to bg-blue-600 */
+        color: #ffffff;
+        /* Equivalent to text-white */
+        font-weight: 600;
+        /* Equivalent to font-semibold */
+        padding: 0.75rem 2rem;
+        /* Equivalent to py-3 px-8 */
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        /* Equivalent to shadow-md */
+        transition: all 0.3s ease-in-out;
+        /* Equivalent to transition duration-300 ease-in-out */
+        transform: scale(1);
+        /* Initial transform state */
+        border: none;
+        cursor: pointer;
+    }
+
+    .cta-button:hover {
+        background-color: #4A6286;
+        /* Equivalent to hover:bg-blue-700 */
+        transform: scale(1.05);
+        /* Equivalent to hover:scale-105 */
+    }
+
+    .cta-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+        /* Equivalent to focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 */
+    }
+
+    /* Responsive adjustments for Section 1 */
+    @media (min-width: 768px) {
+
+        /* md breakpoint */
+        .cta-card {
+            padding: 3rem;
+            /* Equivalent to md:p-12 */
+        }
+
+        .cta-headline {
+            font-size: 3rem;
+            /* Equivalent to md:text-5xl */
+        }
+
+        .cta-subtext {
+            font-size: 1.125rem;
+            /* Equivalent to md:text-lg */
+        }
+    }
+
+
+    /* --- Section 2: About Us --- */
+    .about-section {
+        padding: 4rem 1rem;
+        background-color: #ffffff;
+    }
+
+    .about-container {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        /* Keep as column for stacking overall elements */
+        align-items: center;
+        /* Center everything inside about-container */
+        gap: 3rem;
+    }
+
+    /* This wrapper will contain the logo (left) and heading (centered) */
+    .logo-and-heading-wrapper {
+        width: 90%;
+        /* Take full width to allow independent alignment of its contents */
+        display: flex;
+        flex-direction: column;
+        /* Stack logo container and heading container */
+        align-items: flex-start;
+        /* Align children (logo-container and heading-container) to the left / / Space below logo/heading block before content */
+    }
+
+    .logo-container-s2 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        /* Aligns logo icon and text to the left // Space between logo and the "About Us" heading */
+        /* No need for width: 100% here directly, as parent aligns it */
+        margin-left: 20px;
+    }
+
+    .tripnest-icon-s2 {
+        height: 7.0rem;
+        width: 7.0rem;
+        margin-right: -1.2rem;
+        object-fit: contain;
+    }
+
+    .tripnest-text-logo-s2 {
+        height: 1.8rem;
+        object-fit: contain;
+        position: relative;
+        top: 16px;
+    }
+
+    .about-us-heading-container-s2 {
+        width: 100%;
+        /* Ensure heading container takes full width for centering */
+        text-align: center;
+        /* THIS CENTERS THE "ABOUT US" HEADING */
+        /* No margin-bottom needed here as spacing is managed by logo-container-s2's margin-bottom or parent gap */
+    }
+
+    .about-heading-s2 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #4A6286;
+        margin: 0;
+        /* Remove default margin from h2 */
+    }
+
+    .about-us-content-s2 {
+        display: flex;
+        flex-direction: column;
+        /* Default to column on small screens */
+        align-items: center;
+        /* Center items on small screens */
+        width: 100%;
+        gap: 3rem;
+    }
+
+    .about-us-text-s2 {
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+
+    .about-list-s2 {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .about-list-item-s2 {
+        display: flex;
+        align-items: flex-start;
+        font-size: 1.5rem;
+        color: #4A6286;
+        font-weight: 800;
+    }
+
+    .about-list-arrow-s2 {
+        color: #4A6286;
+        margin-right: 0.75rem;
+        margin-top: 0.25rem;
+    }
+
+    .about-us-image-s2 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .right-image-s2 {
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+        /* Or 'contain' if you changed it earlier */
+
+        /* Add these new lines for the hover effect: */
+        transition: transform 0.3s ease-in-out;
+        /* Smooth transition for 0.3 seconds */
+    }
+
+    /* Add this new rule for the hover state: */
+    .right-image-s2:hover {
+        transform: scale(1.05);
+        /* Zooms the image to 105% of its original size */
+    }
+
+    /* Responsive adjustments for Section 2 */
+    @media (min-width: 768px) {
+        .about-heading-s2 {
+            font-size: 2.5em;
+            /* Adjust heading size for larger screens as per image */
+        }
+
+        .about-us-content-s2 {
+            flex-direction: row;
+            /* Change to row for side-by-side on larger screens */
+            align-items: flex-start;
+            /* Align items to the top */
+            justify-content: space-between;
+            /* Space them out */
+        }
+
+        .about-us-text-s2 {
+            width: 48%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .about-us-image-s2 {
+            width: 48%;
+            justify-content: flex-end;
+            /* Align image to the right on larger screens */
+        }
+
+        .right-image-s2 {
+            height: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .about-heading-s2 {
+            font-size: 2.8em;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .about-heading-s2 {
+            font-size: 2em;
+        }
+
+        .about-list-item-s2 {
+            font-size: 1.2rem;
+        }
+
+        .about-list-arrow-s2 {
+            margin-top: 0.15rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .about-heading-s2 {
+            font-size: 1.8em;
+        }
+
+        .about-list-item-s2 {
+            font-size: 1rem;
+        }
+
+        .logo-container-s2 {
+            margin-left: 0;
+            justify-content: center;
+            width: 100%;
+        }
+    }
+
+    /* --- Section 3: User Reviews (Responsive Version) --- */
+    .user-reviews-section {
+        width: 100%;
+        padding: 60px 0;
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .reviews-container {
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 20px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .reviews-headline {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #4A6286;
+    }
+
+    .reviews-subtext {
+        color: #607d8b;
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 40px auto;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    /* FLEX WRAPPING SCROLLER */
+    .scroller {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    /* INDIVIDUAL REVIEW CARD */
+    .review-card {
+        flex: 1 1 300px;
+        /* Minimum width of 300px, responsive */
+        max-width: 100%;
+        background-color: #7AB2D3;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-sizing: border-box;
+    }
+
+    .review-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .review-card h3 {
+        color: #ffffff;
+        margin: 0;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+
+    .review-card p {
+        color: #e0e0e0;
+        font-size: 1rem;
+        line-height: 1.7;
+        text-align: left;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* Star Rating */
+    .stars {
+        color: #FFD700;
+        font-size: 1.2rem;
+        text-align: left;
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+    }
+
+    .stars::before {
+        content: "★★★★★";
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+    }
+
+    /* Reviewer Info */
+    .reviewer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-top: auto;
+    }
+
+    .profile_name h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #ffffff;
+    }
+
+    .profile_name p {
+        font-size: 0.9rem;
+        color: #cccccc;
+        margin: 0;
+    }
+
+    /* ---------- Responsive Adjustments ---------- */
+
+    /* Tablets */
+    @media (max-width: 768px) {
+        .reviews-headline {
+            font-size: 2.2rem;
+        }
+
+        .reviews-subtext {
+            font-size: 1rem;
+        }
+
+        .review-card {
+            flex: 1 1 100%;
+            padding: 25px;
+        }
+
+        .review-card h3 {
+            font-size: 1.2rem;
+        }
+
+        .review-card p {
+            font-size: 0.95rem;
+        }
+
+        .stars::before {
+            font-size: 1.5rem;
+        }
+
+        .profile_name h3 {
+            font-size: 1rem;
+        }
+
+        .profile_name p {
+            font-size: 0.8rem;
+        }
+    }
+
+    /* Phones (360px–480px) */
+    @media (max-width: 480px) {
+        .reviews-headline {
+            font-size: 1.8rem;
+        }
+
+        .reviews-subtext {
+            font-size: 0.9rem;
+            padding: 0 10px;
+        }
+
+        .review-card {
+            padding: 20px;
+        }
+
+        .review-card h3 {
+            font-size: 1rem;
+        }
+
+        .review-card p {
+            font-size: 0.85rem;
+        }
+
+        .stars::before {
+            font-size: 1.3rem;
+        }
+
+        .profile_name h3 {
+            font-size: 0.95rem;
+        }
+
+        .profile_name p {
+            font-size: 0.75rem;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        /* Distributes items along the main axis */
+        align-items: center;
+        /* Vertically centers items */
+        height: 12%;
+        /* Keep height as desired */
+        position: sticky;
+        top: 0px;
+        background-color: white;
+        width: 100%;
+        z-index: 2;
+        animation: navbar 2s;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 0 10px;
+        /* Add horizontal padding to the nav itself */
+        box-sizing: border-box;
+        /* Include padding in width */
+    }
+
+    .home,
+    .Planner,
+    .AboutUs,
+    .Signin {
+        width: 90px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        border-radius: 10px;
+    }
+
+    .Signin {
+        background-color: #7AB2D3;
+    }
+
+    .Signin:hover {
+        background-color: #4A628a;
+    }
+
+    .sidebar {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        width: 80%;
+        gap: 60px;
+    }
+
+    .sidebar button {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        font-size: medium;
+        font-weight: bold;
+
+    }
+
+    .Signin:hover {
+        background-color: #4A628a;
+        color: white;
+    }
+
+    .sidebar button:hover {
+        color: white;
+        /* background-color: transparent; */
+    }
+
+    .home:hover,
+    .Planner:hover,
+    .AboutUs:hover {
+        background-color: #7AB2D3;
+        color: white;
+        border-radius: 15px;
+    }
+
+    .three_dot {
+        display: none;
+        justify-content: end;
+        align-items: center;
+        width: 90%;
+        font-size: 30px;
+        margin-right: 20px;
+    }
+
+    @media (max-width:767px) {
+        .three_dot {
+            display: flex;
+        }
+
+        .sidebar {
+            display: none;
+        }
+
+    }
+
+    @media (max-width:768px) {
+        .sidebar {
+            gap: 20px;
+        }
+
+    }
+
+    @media (max-width:769px) {
+
+        .tripnest-icon-s2 {
+            width: 50%;
+        }
+
+        .tripnest-text-logo-s2 {
+            width: 40%;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        /* ... existing rules ... */
+        .tripnest-icon-s2 {
+            height: 4rem;
+            /* Slightly smaller icon to make space */
+            width: 4rem;
+            margin-right: -1rem;
+            /* Adjust overlap */
+        }
+
+        .tripnest-text-logo-s2 {
+            height: 1.2rem;
+            /* Smaller text logo */
+            top: 8px;
+            /* Adjust vertical position */
+        }
+
+        nav {
+            height: 10%;
+            /* Slightly less height for nav bar */
+        }
+
+        .three_dot {
+            font-size: 24px;
+            /* Smaller hamburger icon */
+            margin-right: 10px;
+            /* Less margin */
+        }
+    }
+
+    @media (max-width:1024px) {
+        .hlo .main img {
+            left: 200px;
+            top: 150px;
+        }
+
+        .content h1 {
+            width: 25%;
+        }
+    }
+
+    @media (max-width:768px) {
+        .hlo .main img {
+            left: 100px;
+            top: 200px;
+        }
+    }
+
+    @media (max-width:426px) {
+        .hlo .main img {
+            display: none;
+        }
+
+        .hlo .main .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hlo .main .content h1 {
+            margin-top: 70px;
+            width: 70%;
+        }
+
+    }
+
+    .top_tourist_places {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .tourist {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        /* Keep as row */
+        flex-wrap: wrap;
+        /* Keep wrap for responsiveness */
+        justify-content: center;
+        /* This will center the row of cards */
+        align-items: flex-start;
+        /* Adjust alignment along the cross-axis if cards have different heights */
+        gap: 20px;
+        /* <-- DECREASE THIS VALUE for less space between cards (e.g., from 30px to 20px) */
+        padding: 20px;
+        /* Keep or adjust overall padding of the section */
+        box-sizing: border-box;
+    }
+
+    .card {
+        /* Calculate width to fit 4 cards in a row with gaps */
+        width: calc(25% - 20px);
+        /* 25% for 4 items, minus space for gaps (20px * 3 gaps / 4 items) */
+        height: 250px;
+        /* Adjusted height for better proportions or to fill more space */
+        /* You can set height to 'auto' if you prefer it to scale proportionally with the new width and image aspect ratio */
+
+        background-repeat: no-repeat;
+        overflow: hidden;
+        border-radius: 15px;
+        /* Remove or modify margin to primarily use 'gap' on the parent for spacing */
+        margin: 0;
+        /* Changed from 40px. Now spacing is handled by the parent's gap. */
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        /* This keeps the image and details stacked vertically within each card */
+    }
+
+    .section-title-box {
+        border: 1.5px solid #89c2f0;
+        padding: 6px 14px;
+        border-radius: 8px;
+        background-color: #f5faff;
+        /* text-align: center; */
+        width: 150px;
+        margin: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-title {
+        font-weight: bold;
+        /* font-style: italic; */
+        font-size: 16px;
+        color: #364D87;
+    }
+
+    .card:hover {
+        transform: translateY(5px);
+        /* opacity: 0.3; */
+    }
+
+    .card-details {
+        position: absolute;
+        bottom: 0;
+        /* Position at the bottom of the card */
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        /* Semi-transparent background for readability */
+        color: white;
+        padding: 10px;
+        box-sizing: border-box;
+        /* Include padding in width/height */
+        transform: translateY(100%);
+        /* Start hidden (pushed down by 100% of its height) */
+        transition: transform 0.3s ease-in-out;
+        /* Smooth transition for the slide-up effect */
+    }
+
+    .card:hover .card-details {
+        transform: translateY(0);
+        /* Slide up into view on card hover */
+    }
+
+    .card-details h4 {
+        margin: 0 0 5px 0;
+        /* Adjust margin for the title */
+        font-size: 1.1em;
+    }
+
+    .card-details ul {
+        list-style: disc;
+        /* Use bullet points */
+        padding-left: 20px;
+        /* Indent bullet points */
+        margin: 0;
+        /* Remove default margin */
+        font-size: 0.9em;
+    }
+
+    .card-details ul li {
+        margin-bottom: 3px;
+        /* Space between list items */
+    }
+
+    .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* z-index: ; */
+    }
+
+    .card .tag {
+        position: absolute;
+        background: black;
+        color: white;
+        top: 83%;
+        left: 40%;
+        font-size: 12px;
+        padding: 3px 7px;
+        border-radius: 10px;
+        font-weight: 500;
+    }
+
+    .visit {
+        width: 100px;
+        height: 1000px;
+        background-color: black;
+        color: black;
+    }
+
+    .card-content {
+        padding: 15px;
+        position: absolute;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    @media (max-width: 767px) {
+        .tourist {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        /* ... existing rules ... */
+        .card {
+            width: calc(100% - 40px);
+            /* Tighter fit for single column on 320px. 20px padding on tourist, so 40px total side-padding/gap */
+            height: 220px;
+            /* Slightly adjusted height */
+            margin: 10px auto;
+            /* Reduced vertical margin, centered horizontally */
+            box-sizing: border-box;
+            /* Crucial: Ensures padding doesn't add to width */
+        }
+
+        .tourist {
+            gap: 15px;
+            /* Smaller gap */
+            padding: 10px;
+            /* Reduced padding on the container */
+        }
+    }
+
+    @media (max-width: 375px) {
+
+        /* Navbar & Logo Adjustments */
+        .tripnest-icon-s2 {
+            height: 3rem;
+            /* Make icon even smaller */
+            width: 3rem;
+            margin-right: -0.5rem;
+            /* Reduce negative margin further */
+        }
+
+        .tripnest-text-logo-s2 {
+            height: 0.9rem;
+            /* Make text logo even smaller */
+            top: 3px;
+            /* Adjust vertical position */
+        }
+
+        nav {
+            height: 7%;
+            /* Reduce nav height for smallest screens */
+        }
+
+        .three_dot {
+            font-size: 20px;
+            /* Smallest hamburger icon */
+            margin-right: 5px;
+            /* Minimal margin */
+        }
+
+        .logo-container-s2 {
+            margin-left: 5px;
+            /* Ensure logo is not pushed too far left */
+        }
+
+
+        /* Hero Section (Video Content) Adjustments */
+        .video-content-wrapper {
+            width: 100%;
+            /* Take full width */
+            padding: 0 10px;
+            /* Adjust padding slightly more for very narrow screens */
+            box-sizing: border-box;
+            /* Ensures padding is included in width */
+            left: 0;
+            /* Align to the left edge */
+            transform: translateX(0);
+            /* Remove any horizontal transform */
+            text-align: center;
+            /* Center the text within the wrapper */
+        }
+
+        .video-content-wrapper h1 {
+            font-size: 1.8rem;
+            /* Significantly reduce heading size */
+            line-height: 1.1;
+            margin: 0;
+            /* Ensure no extra margins */
+            padding: 0 5px;
+            /* Small inner padding to prevent text touching screen edges */
+            box-sizing: border-box;
+        }
+
+        .video-content-wrapper p {
+            font-size: 0.8rem;
+            /* Significantly reduce paragraph size */
+            margin-bottom: 25px;
+            /* Provide more space below paragraph for button */
+            padding: 0 5px;
+            /* Small inner padding */
+            box-sizing: border-sizing;
+        }
+
+        .video-content-wrapper button {
+            font-size: 0.8rem;
+            /* Smaller button text */
+            padding: 6px 15px;
+            /* Smaller button padding */
+            margin-bottom: 30px;
+            /* **Increased margin-bottom to push Top Tourist Places down** */
+            white-space: nowrap;
+            /* Prevent button text from wrapping */
+        }
+
+
+        /* Top Tourist Places Section (Button Merging Fix) */
+        .top_tourist_places {
+            margin-top: 0;
+            /* Ensure no conflicting top margin */
+            padding-top: 0;
+            /* Ensure no conflicting top padding */
+        }
+
+        .section-title-box {
+            width: 130px;
+            /* Slightly smaller width for the button box */
+            margin: 25px auto 15px auto;
+            /* **Crucial: More top margin, less bottom margin** */
+            white-space: nowrap;
+            /* Prevent text wrapping */
+        }
+
+        /* Tourist Cards (ensure they fit single column and don't overflow) */
+        .tourist {
+            padding: 10px;
+            /* Consistent padding */
+            gap: 15px;
+            /* Consistent gap */
+        }
+
+        .card {
+            width: calc(100% - 20px);
+            /* Adjust width to fit perfectly with 10px padding on .tourist */
+            height: 200px;
+            /* Adjust height as needed for single column */
+            margin: 0 auto;
+            /* Center horizontally, vertical margin handled by .tourist gap */
+        }
+
+        /* About Us Section Adjustments */
+        .about-heading-s2 {
+            font-size: 1.6em;
+            /* Adjust heading size */
+        }
+
+        .about-list-item-s2 {
+            font-size: 0.9rem;
+            /* Adjust list item font size */
+        }
+
+        .about-list-arrow-s2 {
+            margin-top: 0.1rem;
+            /* Fine-tune arrow alignment */
+        }
+    }
+
+    @media (max-width: 320px) {
+
+        /* Global Overrides for 320px */
+        html,
+        body {
+            min-width: 320px;
+            /* Ensure body doesn't shrink below 320px */
+            overflow-x: hidden;
+            /* Force hide any horizontal scrollbar */
+        }
+
+        /* Navbar & Logo Fixes */
+        .logo-container-s2 {
+            margin-left: 0 !important;
+            /* Ensure no left margin pushes it */
+            justify-content: flex-start !important;
+            /* Align left */
+            width: auto !important;
+            /* Allow it to take only necessary width */
+            padding-left: 5px;
+            /* Small padding from left edge */
+        }
+
+        .tripnest-icon-s2 {
+            height: 3rem !important;
+            /* Smallest icon size */
+            width: 3rem !important;
+            margin-right: -0.5rem !important;
+            /* Adjust negative margin */
+        }
+
+        .tripnest-text-logo-s2 {
+            height: 0.8rem !important;
+            /* Smallest text logo size */
+            top: 2px !important;
+            /* Fine-tune vertical alignment */
+        }
+
+        nav {
+            height: 7% !important;
+            /* Ensure nav height is minimal */
+            padding: 0 !important;
+            /* Remove any padding that could cause issues */
+        }
+
+        .three_dot {
+            font-size: 20px !important;
+            /* Smallest hamburger icon */
+            margin-right: 5px !important;
+            /* Minimal right margin */
+            width: auto !important;
+            /* Allow it to take only necessary width */
+        }
+
+        /* Hero Section (Video Content) Alignment & Spacing Fixes */
+        .video-content-wrapper {
+            width: 100% !important;
+            /* Force full width */
+            max-width: none !important;
+            /* Remove max-width constraint */
+            padding: 0 10px !important;
+            /* Consistent padding from edges */
+            box-sizing: border-box !important;
+            /* Crucial: padding doesn't add to width */
+            left: 0 !important;
+            /* Ensure it starts at left edge */
+            transform: none !important;
+            /* Remove any transform completely */
+            display: flex !important;
+            /* Ensure flex behavior */
+            flex-direction: column !important;
+            /* Ensure column stack */
+            align-items: center !important;
+            /* Force center alignment of items */
+            text-align: center !important;
+            /* Force center alignment of text within items */
+            gap: 15px !important;
+            /* Slightly reduce gap between items in hero */
+        }
+
+        .video-content-wrapper h1 {
+            font-size: 1.6rem !important;
+            /* Further significant reduction for heading */
+            line-height: 1.1 !important;
+            margin: 0 !important;
+            /* Remove all margins */
+            padding: 0 5px !important;
+            /* Small inner padding */
+            box-sizing: border-box !important;
+        }
+
+        .video-content-wrapper p {
+            font-size: 0.75rem !important;
+            /* Further reduce paragraph size */
+            margin: 0 !important;
+            /* Remove all margins */
+            padding: 0 5px !important;
+            /* Small inner padding */
+            box-sizing: border-box !important;
+        }
+
+        .video-content-wrapper button {
+            font-size: 0.8rem !important;
+            /* Smallest button text */
+            padding: 6px 15px !important;
+            /* Smallest button padding */
+            margin-top: 20px !important;
+            /* **Explicitly set larger top margin for separation** */
+            margin-bottom: 25px !important;
+            /* **Explicitly set larger bottom margin for separation** */
+            white-space: nowrap !important;
+            /* Prevent text wrap */
+            min-width: 100px !important;
+            /* Ensure button doesn't get too small */
+        }
+
+        /* Top Tourist Places Section (Button Merging Fix) */
+        .top_tourist_places {
+            margin-top: 0 !important;
+            /* No top margin here */
+            padding-top: 0 !important;
+            /* No top padding here */
+            width: 100% !important;
+            /* Ensure it takes full width */
+        }
+
+        .section-title-box {
+            width: 120px !important;
+            /* Make title box slightly narrower */
+            margin: 25px auto 15px auto !important;
+            /* Force top/bottom margins and horizontal centering */
+            padding: 5px 10px !important;
+            /* Reduce inner padding */
+            white-space: nowrap !important;
+            /* Prevent text wrap */
+            font-size: 0.9rem !important;
+            /* Smaller text if needed */
+        }
+
+        /* Tourist Cards (ensure single column, no overflow) */
+        .tourist {
+            padding: 10px !important;
+            /* Consistent padding */
+            gap: 15px !important;
+            /* Consistent gap */
+        }
+
+        .card {
+            width: calc(100% - 20px) !important;
+            /* Ensure cards fit. 10px padding on .tourist means 20px total side-padding/gap */
+            height: 180px !important;
+            /* Adjust height, 200px might still be too much space */
+            margin: 0 auto !important;
+            /* Center horizontally, vertical margin by .tourist gap */
+            box-sizing: border-box !important;
+        }
+
+        .card-details h4 {
+            font-size: 0.9em !important;
+        }
+
+        .card-details ul {
+            font-size: 0.7em !important;
+            padding-left: 10px !important;
+        }
+
+        /* About Us Section Adjustments */
+        .about-heading-s2 {
+            font-size: 1.4em !important;
+            /* Smaller heading */
+        }
+
+        .about-list-item-s2 {
+            font-size: 0.8rem !important;
+            /* Smaller list items */
+        }
+
+        .about-list-arrow-s2 {
+            margin-top: 0.05rem !important;
+            /* Fine-tune arrow alignment */
+        }
+    }
+
+    .mobile {
+        width: 50%;
+        height: 350px;
+        background-color: white;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        display: none;
+        flex-direction: column;
+        border-radius: 20px;
+        margin: 10px;
+        gap: 10px;
+    }
+
+    .mobile div {
+        width: 60%;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        margin-left: 50px;
+    }
+
+    .mobile div img {
+        padding-top: 10px;
+    }
+
+    .mobile button {
+        width: 60%;
+        height: 20%;
+        background-color: transparent;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    .mobile div:hover {
+        background-color: #7AB2D3;
+
+    }
+
+    .mobile .cross {
+        width: 90%;
+        display: flex;
+        justify-content: end;
+        font-size: 50px;
+        margin-top: 20px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    @media (min-width:426px) {
+        .mobile {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        /* ... existing rules ... */
+
+        .video-content-wrapper {
+            width: 90%;
+            /* Give content more width in a very small screen */
+            padding: 0 10px;
+            /* Add some horizontal padding */
+            box-sizing: border-box;
+            /* Crucial for padding not to add to width */
+        }
+
+        .video-content-wrapper h1 {
+            font-size: 2.2rem;
+            /* Further reduce main heading size */
+            line-height: 1.1;
+        }
+
+        .video-content-wrapper p {
+            font-size: 0.9rem;
+            /* Further reduce paragraph size */
+            margin-bottom: 1rem;
+            /* Reduce space below paragraph */
+        }
+
+        .video-content-wrapper button {
+            font-size: 0.9rem;
+            /* Smaller button text */
+            padding: 8px 18px;
+            /* Smaller button padding */
+            margin-top: 10px;
+            /* Add some space above the button */
+            position: relative;
+            /* Ensure it respects flow, not absolute */
+            z-index: 2;
+            /* Make sure it's above other elements if needed */
+            background-color: #7AB2D3;
+            /* Ensure solid background, no rgba */
+        }
+
+        /* Positioning of "Top Tourist Places" box */
+        .top_tourist_places {
+            position: relative;
+            /* Ensure proper stacking context */
+            z-index: 1;
+            /* Make sure it's above elements that might be below it on z-index */
+            margin-top: 20px;
+            /* Provide some space from the element above it */
+        }
+
+        .section-title-box {
+            width: 140px;
+            /* Slightly adjust width */
+            margin: 15px auto;
+            /* Reduced margin, centered */
+            position: relative;
+            /* Ensure it stays in flow */
+            z-index: 2;
+            /* Make sure it's above video content if that's somehow beneath it */
+        }
+    }
+
+    .mobile .services {
+        margin-bottom: 20px;
+    }
+
+    @keyframes appear {
+        from {
+            transform: translateX(-50px);
+            opacity: 0;
+            scale: 0.8;
+        }
+
+        to {
+            transform: translateX(0px);
+            opacity: 1;
+            scale: 1;
+        }
+    }
+
+    @keyframes appears {
+        from {
+            transform: translateX(-50px);
+            opacity: 0;
+            scale: 0.8;
+        }
+
+        to {
+            transform: translateX(0px);
+            opacity: 1;
+            scale: 1;
+        }
+    }
+
+    .hlo .main img {
+        position: absolute;
+        top: 75px;
+        width: 75%;
+        animation: flight 4s;
+
+    }
+
+    @keyframes navbar {
+        0% {
+            transform: translatey(-100px);
+        }
+
+        100% {
+            transform: translatey(0px);
+        }
+    }
+
+    @keyframes flight {
+        0% {
+            transform: translateX(150px);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
+    }
+
+    .card {
+        animation: appear 5s linear;
+        animation-timeline: view();
+        animation-range: entry 5% cover 70%;
+    }
+
+
+    .video {
+        width: 100%;
+        height: 80%;
+        /* animation: videos 5s ; */
+    }
+
+    .video video {
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* animation: videos 5s  ; */
+        animation: videoss 3s;
+    }
+
+    @keyframes videoss {
+        0% {
+            height: 0%;
+
+        }
+
+        100% {
+            height: 100%;
+        }
+    }
+
+    /* @keyframes videos{
+    0%{
+        width: 0%;
+        
+    }
+    100%{
+        width: 100%;
+    }
+} */
+    .hlo {
+        width: 100%;
+        height: 90%;
+    }
+
+    .content h1 {
+        width: 50%;
+        color: #4A6286;
+        font-size: 55px;
+    }
+
+    /* .video .content {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        height: 75%;
+        width: 100%;
+        z-index: 1;
+        position: absolute;
+        top: 0px;
+        animation: flight 3s;
+    }
+
+    .video p {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        height: 90%;
+        width: 90%;
+        z-index: 1;
+        position: absolute;
+        top: 0px;
+        font-size: 20px;
+        color: white;
+        animation: flight 3s;
+    }
+
+    .video .explore {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        height: 110%;
+        width: 70%;
+        z-index: 1;
+        position: absolute;
+        top: 0px;
+         transform: translateX(100px); 
+        animation: name 3s;
+        margin: 25px; 
+    }*/
+    .video {
+        width: 100%;
+        height: 80%;
+        position: relative;
+        /* IMPORTANT: This makes it the reference for absolutely positioned children */
+    }
+
+    /* New wrapper for text and button */
+    .video-content-wrapper {
+        position: absolute;
+        top: 50%;
+        /* Center vertically */
+        left: 50%;
+        /* Center horizontally */
+        transform: translate(-50%, -50%);
+        /* Adjust for true centering */
+        text-align: center;
+        /* Center text and inline-block elements */
+        z-index: 1;
+        width: 80%;
+        /* Adjust width as needed */
+        max-width: 800px;
+        /* Max width for content */
+        display: flex;
+        /* Use flexbox to stack and center children */
+        flex-direction: column;
+        align-items: center;
+        /* Center items horizontally within the flex container */
+        gap: 20px;
+        /* Space between elements */
+    }
+
+    .video-content-wrapper h1 {
+        color: #4A6286;
+        /* Match the color from the image */
+        font-size: 55px;
+        margin: 0;
+        /* Remove default margin */
+        line-height: 1.2;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* Add text shadow for readability */
+    }
+
+    .video-content-wrapper p {
+        font-size: 20px;
+        color: white;
+        /* Make text white for contrast */
+        margin: 0;
+        /* Remove default margin */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* Add text shadow for readability */
+    }
+
+    .video-content-wrapper button {
+        padding: 12px 30px;
+        /* Increased horizontal padding */
+        border-radius: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        background-color: #7AB2D3;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .video-content-wrapper button:hover {
+        background-color: #4A6286;
+        /* Darker blue on hover */
+        transform: scale(1.05);
+        /* Slightly enlarge on hover */
+    }
+
+    .video button {
+        padding: 12px;
+        border-radius: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        background-color: #7AB2D3;
+        color: white;
+    }
+
+    .video button:hover {
+        background-color: transparent;
+        color: white;
+    }
+
+    */ .video .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 110%;
+        width: 50%;
+        z-index: 1;
+        position: absolute;
+        top: 0px;
+    }
+
+    @keyframes name {
+        0% {
+            transform: translateX(-100px);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
+    }
+
+    @keyframes getstarted {
+        0% {
+            border-radius: 20%;
+
+        }
+
+        100% {
+            border-radius: 100%;
+        }
+    }
+
+    .cta-card {
+        position: relative;
+        z-index: 1;
+        /* Equivalent to z-10 */
+        background-color: rgba(255, 255, 255, 0.3);
+        /* Equivalent to bg-white bg-opacity-30 */
+        backdrop-filter: blur(10px);
+        /* Equivalent to backdrop-filter: blur(10px) */
+        -webkit-backdrop-filter: blur(10px);
+        /* For Safari */
+        border-radius: 0.75rem;
+        /* Equivalent to rounded-xl */
+        padding: 2rem;
+        /* Equivalent to p-8 */
+        max-width: 42rem;
+        /* Equivalent to max-w-2xl */
+        text-align: center;
+        /* Equivalent to text-center */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        /* Equivalent to shadow-lg */
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        /* Equivalent to border border-white border-opacity-40 */
+        animation: appears 5s linear;
+        animation-timeline: view();
+        animation-range: entry 50% cover 40%;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f9fc;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #7ab2d3 0%, #eaf4f8 100%);
+      color: #003e5c;
+      padding: 40px 20px 20px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .foot {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: flex-start;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo img {
+      margin: 5px;
+    }
+
+    .Features, .contact_us {
+      max-width: 300px;
+    }
+
+    .Features h2,
+    .contact_us h2 {
+      margin-bottom: 10px;
+      border-left: 4px solid #0077b6;
+      padding-left: 8px;
+    }
+
+    .Features ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    .Features ul li {
+      margin: 8px 0;
+    }
+
+    .Features ul li a {
+      text-decoration: none;
+      color: #005c99;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .Features ul li a:hover {
+      color: #00aaff;
+      padding-left: 5px;
+    }
+
+    .phone, .mail {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+      font-size: 1.1rem;
+    }
+
+    .social {
+      display: flex;
+      gap: 15px;
+      font-size: 1.6rem;
+      margin-top: 10px;
+    }
+
+    .social i {
+      color: #003e5c;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social i:hover {
+      color: #00aaff;
+      transform: scale(1.2);
+    }
+
+    footer > div:last-child {
+      text-align: center;
+      font-size: 0.95rem;
+      padding-top: 15px;
+      border-top: 1px solid #ccc;
+    }
+
+    span {
+      color: #005c99;
+      cursor: pointer;
+    }
+
+    span:hover {
+      color: #00aaff;
+    }
+
+    @media (max-width: 600px) {
+      .foot {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+</style>
+
+<body>
+    <nav>
+        <div class="logo-container-s2">
+            <img src="/assests/logo (2).png" alt="TripNest Icon" class="tripnest-icon-s2">
+            <img src="/assests/TripNest.png" alt="TripNest Text Logo" class="tripnest-text-logo-s2">
+        </div>
+        <div class="sidebar">
+            <div class="home">
+                <button> <a href="Home.html" style="color: black;">Home</a></button>
+            </div>
+            <div class="Planner">
+                <button>Planner</a></button>
+            </div>
+            <div class="AboutUs">
+                <button>AboutUs</button>
+            </div>
+            <div class="Signin">
+                <button><a href="login_registration.html" style="text-decoration: none; color: white;">SignIn</a></button>
+            </div>
+        </div>
+        <div class="three_dot" onclick="funn()">&#9776</div>
+        <div class="mobile">
+            <span class="cross" onclick="fun()">&times;</span>
+            <div class="home">
+                <img src="/assests/home_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png" alt="">
+                <button>Home</button>
+            </div>
+            <div class="products">
+                <img src="/assests/map_pin_review_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png" alt="">
+                <button>Planner</button>
+            </div>
+            <div class="aboutus">
+                <img src="/assests/page_footer_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png" alt="">
+                <button>AboutUs</button>
+            </div>
+            <div class="services">
+                <img src="/assests/login_24dp_WHITE_FILL0_wght400_GRAD0_opsz24.png" alt="">
+                <button>SignIn</button>
+            </div>
+        </div>
+    </nav>
+    <section class="hlo">
+        <div class="video">
+            <video autoplay loop muted playsinline src="/assests/2871918-hd_1920_1080_30fps.mp4"></video>
+            <div class="video-content-wrapper">
+                <h1>Pack Your Bags, Find Yourself </h1>
+                <p>Sometimes, the best way to discover who you are is to get lost</p>
+                <button>
+                    Explore
+                </button>
+            </div>
+            <div class="image">
+            </div>
+        </div>
+        <div class="top_tourist_places">
+            <div class="section-title-box">
+                <span class="section-title">Top Tourist Places</span>
+            </div>
+            <div class="tourist">
+                <div class="card">
+                    <img src="/assests/Rectangle 103.png" alt="Golden Bridge, Vietnam" />
+                    <div class="card-details">
+                        <h4>Golden Bridge, Vietnam</h4>
+                        <ul>
+                            <li>Iconic hand-supported bridge</li>
+                            <li>Offers stunning panoramic views</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/assests/sheikh-zayed-mosque-credit-getty-images 1.png"
+                        alt="Sheikh Zayed Grand Mosque, UAE" />
+                    <div class="card-details">
+                        <h4>Sheikh Zayed Grand Mosque, UAE</h4>
+                        <ul>
+                            <li>Architectural marvel with intricate designs</li>
+                            <li>One of the world's largest mosques</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/assests/3-eiffel-tower-getty 1.png" alt="Eiffel Tower, France" />
+                    <div class="card-details">
+                        <h4>Eiffel Tower, France</h4>
+                        <ul>
+                            <li>Parisian icon and engineering feat</li>
+                            <li>Breathtaking city views from the top</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/assests/sheikh-zayed-mosque-credit-getty-images 1.png"
+                        alt="Sheikh Zayed Grand Mosque, UAE" />
+                    <div class="card-details">
+                        <h4>Sheikh Zayed Grand Mosque, UAE</h4>
+                        <ul>
+                            <li>Architectural marvel with intricate designs</li>
+                            <li>One of the world's largest mosques</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="card">
+                    <img src="/assests/3-eiffel-tower-getty 1.png" alt="Eiffel Tower, France" />
+                    <div class="card-details">
+                        <h4>Eiffel Tower, France</h4>
+                        <ul>
+                            <li>Parisian icon and engineering feat</li>
+                            <li>Breathtaking city views from the top</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/assests/Rectangle 103.png" alt="Golden Bridge, Vietnam" />
+                    <div class="card-details">
+                        <h4>Golden Bridge, Vietnam</h4>
+                        <ul>
+                            <li>Iconic hand-supported bridge</li>
+                            <li>Offers stunning panoramic views</li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <section class="cta-background-image">
+            <div class="cta-card">
+                <h2 class="cta-headline">The World Is Waiting <br> Start Planning</h2>
+                <p class="cta-subtext">Let's turn your travel dreams into reality. Tell us your destination, and we'll
+                    handle the rest.</p>
+                <button class="cta-button">
+                    <a style="text-decoration: none; color: white;" href="Form.html">Get start</a>
+
+                </button>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-container">
+                <div class="logo-and-heading-wrapper">
+                    <div class="logo-container-s2">
+                        <img src="/assests/logo (2).png" alt="TripNest Icon" class="tripnest-icon-s2">
+                        <img src="/assests/TripNest.png" alt="TripNest Text Logo" class="tripnest-text-logo-s2">
+                    </div>
+                    <div class="about-us-heading-container-s2">
+                        <h2 class="about-heading-s2">About Us</h2>
+                    </div>
+                </div>
+
+                <div class="about-us-content-s2">
+                    <div class="about-us-text-s2">
+                        <ul class="about-list-s2">
+                            <li class="about-list-item-s2">
+                                <span class="about-list-arrow-s2">&gt;</span>
+                                <span>Find tourist spots between two locations</span>
+                            </li>
+                            <li class="about-list-item-s2">
+                                <span class="about-list-arrow-s2">&gt;</span>
+                                <span>Get smart, route-based travel recommendations</span>
+                            </li>
+                            <li class="about-list-item-s2">
+                                <span class="about-list-arrow-s2">&gt;</span>
+                                <span>Discover hidden gems &amp; scenic stops</span>
+                            </li>
+                            <li class="about-list-item-s2">
+                                <span class="about-list-arrow-s2">&gt;</span>
+                                <span>Plan less, explore more</span>
+                            </li>
+                            <li class="about-list-item-s2">
+                                <span class="about-list-arrow-s2">&gt;</span>
+                                <span>Perfect for road trips &amp; spontaneous detours</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="about-us-image-s2">
+                        <img src="https://blog.erasmusgeneration.org/sites/default/files/articles/2022-03/travelling_alone_all_across_the_globe.jpg" alt="Global Travel Illustration" class="right-image-s2">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="user-reviews-section">
+            <div class="reviews-container">
+                <h1 class="reviews-headline">Reviews</h1>
+                <p class="reviews-subtext">
+                    Hear from our adventurers about their seamless travel planning and unforgettable journeys with
+                    TripNest.
+                </p>
+                <div class="scroller">
+                    <div class="review-card">
+                        <div class="stars"></div>
+                        <h3>Must-Have App!</h3>
+                        <p>
+                            "The route-based recommendations were spot on. Discovered hidden gems and saved much time
+                            planning. Love it!" </p>
+                        <div class="reviewer">
+                            <div class="profile_name">
+                                <h3>Tiana Philips</h3>
+                                <p>Photographer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"></div>
+                        <h3>Must-Have App!</h3>
+                        <p>
+                            "The route-based recommendations were spot on. Discovered hidden gems and saved much time
+                            planning. Love it!" </p>
+                        <div class="reviewer">
+                            <div class="profile_name">
+                                <h3>Tiana Philips</h3>
+                                <p>Photographer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"></div>
+                        <h3>Seamless Planning!</h3>
+                        <p>
+                            "Finally, a tool that helps me explore more and plan less. Spontaneous detours were a
+                            breeze. Thank you, TripNest!"
+                        </p>
+                        <div class="reviewer">
+                            <div class="profile_name">
+                                <h3>Talan Westervelt</h3>
+                                <p>Businessman</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"></div>
+                        <h3>Incredible Journeys!</h3>
+                        <p>
+                            "Every trip has been fantastic with TripNest. The suggestions are unique and perfectly
+                            tailored to my route. Amazing!"
+                        </p>
+                        <div class="reviewer">
+                            <div class="profile_name">
+                                <h3>Sarah Miller</h3>
+                                <p>Travel Blogger</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"></div>
+                        <h3>Fantastic Experience!</h3>
+                        <p>
+                            "TripNest truly simplifies travel planning. Found amazing spots I wouldn't have otherwise!
+                            Highly recommended for road trips."
+                        </p>
+                        <div class="reviewer">
+                            <div class="profile_name">
+                                <h3>James Gouse</h3>
+                                <p>Graphic Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"></div>
+                        <h3>A Must-Have App!</h3>
+                        <p>
+                            "The route-based recommendations were spot on. Discovered hidden gems and saved much time
+                            planning. Love it!"
+                        </p>
+                        <div class="reviewer">
+                            <div class="profile_name">
+                                <h3>Tiana Philips</h3>
+                                <p>Photographer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+    <div class="foot">
+      <div class="logo">
+        <img class="img1" src="/assests/logo (2).png" alt="TripNest_Logo" width="100" height="60">
+        <img class="img2" src="/assests/TripNest.png" alt="TripNest_Title" width="100" height="25">
+      </div>
+
+      <div class="Features">
+        <h2>Features</h2>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Planner</a></li>
+          <li><a href="#">Currency Converter</a></li>
+          <li><a href="#">Language Translator</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Reviews</a></li>
+        </ul>
+      </div>
+
+      <div class="contact_us">
+        <h2>Contact Us</h2>
+        <div class="phone">
+          <i class="fa-solid fa-phone"></i>
+          <span>+91 99********</span>
+        </div>
+        <div class="mail">
+          <i class="fa-solid fa-envelope"></i>
+          <span>tripNest@gmail.com</span>
+        </div>
+        <div class="social">
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-linkedin"></i>
+          <i class="fa-brands fa-github"></i>
+        </div>
+      </div>
+    </div>
+
+    <div>&copy;&nbsp;Copyright 2025 <span>TripNest</span>. All Rights Reserved</div>
+  </footer>
+        <script>
+
+            function fun() {
+                document.getElementsByClassName("mobile")[0].style = "display: none;"
+            }
+            function funn() {
+                document.getElementsByClassName("mobile")[0].style = "display: flex; right:0px;"
+            }
+
+        </script>
+
+</body>
+
+</html>

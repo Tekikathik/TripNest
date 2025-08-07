@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login/Register</title>
+  <style>
+    /* Basic Reset and Font */
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif; /* Using Inter font as per instructions */
+    }
+
+    /* Body Styling */
+    body {
+      background: #f0f2f5; /* Lighter background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden; /* Prevent body scroll */
+    }
+
+    /* Main Container for Forms */
+    .container {
+      background: #fff;
+      border-radius: 15px; /* More rounded corners */
+      box-shadow: 0 18px 36px rgba(0,0,0,0.2), /* Enhanced shadow */
+                  0 12px 12px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      width: 900px;
+      max-width: 95%; /* Adjusted max-width for better mobile fit */
+      min-height: 550px; /* Slightly increased height */
+      transition: all 0.7s ease-in-out; /* Smoother transition */
+      display: flex;
+    }
+
+    /* Form Container Positioning */
+    .form-container {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      transition: all 0.7s ease-in-out; /* Smoother transition */
+    }
+
+    /* Sign-In Form Specifics */
+    .sign-in-container {
+      left: 0;
+      width: 50%;
+      z-index: 2;
+    }
+
+    /* Sign-Up Form Specifics */
+    .sign-up-container {
+      left: 0;
+      width: 50%;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* Active Panel States */
+    .container.right-panel-active .sign-up-container {
+      transform: translateX(100%);
+      opacity: 1;
+      z-index: 5;
+    }
+
+    .container.right-panel-active .sign-in-container {
+      transform: translateX(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* Form Styling */
+    form {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 0 60px; /* Increased padding */
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Input Field Styling */
+    input {
+      background: #f5f5f5; /* Lighter input background */
+      border: none;
+      padding: 14px 18px; /* Slightly larger padding */
+      margin: 10px 0; /* Increased margin */
+      width: 100%;
+      border-radius: 8px; /* More rounded input corners */
+      transition: 0.3s ease;
+      font-size: 16px; /* Larger font size */
+    }
+
+    input:focus {
+      outline: 2px solid #5C8DBC; /* Darker blue focus */
+      background-color: #e8e8e8;
+    }
+
+    /* Button Styling */
+    button {
+      border-radius: 25px; /* More rounded buttons */
+      border: 1px solid #5C8DBC;
+      background-color: #5C8DBC; /* Darker blue button */
+      color: #fff;
+      font-size: 15px; /* Slightly larger font */
+      font-weight: bold;
+      padding: 14px 50px; /* Larger padding */
+      margin-top: 15px; /* Increased top margin */
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    button:hover {
+      background-color: #4A7BA3; /* Even darker blue on hover */
+      transform: translateY(-2px); /* Lift effect */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Ghost Button for Overlay */
+    .ghost {
+      background-color: transparent;
+      border-color: #fff;
+      color: #fff;
+      box-shadow: none; /* No shadow for ghost button */
+    }
+
+    .ghost:hover {
+      background-color: rgba(255,255,255,0.2); /* More visible hover */
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow on hover */
+    }
+
+    /* Overlay Container */
+    .overlay-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      transition: transform 0.7s ease-in-out; /* Smoother transition */
+      z-index: 100;
+      border-radius: 15px; /* Match container border-radius */
+    }
+
+    .container.right-panel-active .overlay-container {
+      transform: translateX(-100%);
+    }
+
+    /* Overlay Background */
+    .overlay {
+      background: linear-gradient(to right, #5C8DBC, #364D87); /* Gradient with darker blue */
+      color: #ffffff;
+      position: relative;
+      left: -100%;
+      height: 100%;
+      width: 200%;
+      transform: translateX(0);
+      transition: transform 0.7s ease-in-out; /* Smoother transition */
+    }
+
+    .container.right-panel-active .overlay {
+      transform: translateX(50%);
+    }
+
+    /* Overlay Panel Styling */
+    .overlay-panel {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 40px;
+      text-align: center;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      transition: transform 0.7s ease-in-out; /* Smoother transition */
+    }
+
+    .overlay-left {
+      transform: translateX(-20%);
+    }
+
+    .container.right-panel-active .overlay-left {
+      transform: translateX(0);
+    }
+
+    .overlay-right {
+      right: 0;
+      transform: translateX(0);
+    }
+
+    .container.right-panel-active .overlay-right {
+      transform: translateX(20%);
+    }
+
+    /* Social Icons */
+    .social-icons {
+      margin-top: 20px; /* Increased margin */
+      display: flex;
+      gap: 20px; /* Increased gap */
+    }
+
+    .social-icons a img {
+      width: 36px; /* Slightly larger icons */
+      height: 36px;
+      border-radius: 50%; /* Make icons round */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .social-icons a img:hover {
+      transform: scale(1.15); /* Slightly less aggressive scale */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25); /* More prominent shadow */
+    }
+
+    /* Custom Message Box */
+    .message-box {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .message-box.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .message-box.success {
+      background-color: #28a745; /* Green for success */
+    }
+
+    .message-box.error {
+      background-color: #dc3545; /* Red for error */
+    }
+
+    .message-box .icon {
+      font-size: 20px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 767px) {
+      .container {
+        flex-direction: column;
+        width: 100%;
+        height: auto; /* Allow height to adjust */
+        min-height: 650px; /* Ensure minimum height for content */
+        border-radius: 0; /* No border-radius on small screens */
+        box-shadow: none; /* No shadow on small screens */
+      }
+
+      .form-container {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s ease-in-out;
+      }
+
+      .sign-in-container,
+      .sign-up-container {
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: absolute;
+      }
+
+      .container.right-panel-active .sign-in-container {
+        transform: translateY(-100%);
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .container.right-panel-active .sign-up-container {
+        transform: translateY(0%);
+        opacity: 1;
+        z-index: 5;
+      }
+
+      .sign-in-container {
+        transform: translateY(0%);
+        z-index: 5;
+      }
+
+      .sign-up-container {
+        transform: translateY(100%);
+        z-index: 1;
+      }
+
+      .overlay-container {
+        display: none; /* Hide overlay on small screens */
+      }
+
+      form {
+        padding: 0 30px; /* Reduced padding for smaller screens */
+      }
+
+      h1 {
+        font-size: 28px; /* Adjust heading size */
+      }
+
+      p {
+        font-size: 14px; /* Adjust paragraph size */
+      }
+
+      button {
+        padding: 12px 40px; /* Adjust button padding */
+        font-size: 14px;
+      }
+
+      .social-icons {
+        gap: 15px;
+      }
+
+      .social-icons a img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    /* Mobile Toggle for switching forms */
+    .mobile-toggle {
+      display: none; /* Hidden by default */
+    }
+
+    @media (max-width: 768px) {
+      .mobile-toggle {
+        display: block; /* Show on small screens */
+        margin-top: 20px;
+        font-size: 15px;
+        color: #5C8DBC; /* Match button color */
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    }
+  </style>
+  <!-- Font Awesome for icons in message box -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form id="registerForm">
+        <h1>Create Account</h1>
+        <input type="text" placeholder="Name" name="name" required />
+        <input type="email" placeholder="Email" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
+        <button type="submit">Sign Up</button>
+        <p style="margin: 15px 0 5px; font-size: 14px; color: #888;">or sign up with social accounts</p>
+        <div class="social-icons">
+          <a href="#"><img src="https://img.icons8.com/color/32/google-logo.png" alt="Google" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=G'" /></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/32/000000/facebook-new.png" alt="Facebook" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=F'" /></a>
+          <a href="#"><img src="https://img.icons8.com/ios-glyphs/32/github.png" alt="GitHub" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=Gh'" /></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/32/0077B5/linkedin.png" alt="LinkedIn" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=L'" /></a>
+        </div>
+        <div class="mobile-toggle" id="goToSignIn">Already have an account? Sign In</div>
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form id="loginForm">
+        <h1>Sign In</h1>
+        <input type="email" placeholder="Email" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
+        <a href="#" style="font-size: 14px; color: #5C8DBC; text-decoration: none; margin: 10px 0 15px;">Forgot your password?</a>
+        <button type="submit">Sign In</button>
+        <p style="margin: 15px 0 5px; font-size: 14px; color: #888;">or sign in with social accounts</p>
+        <div class="social-icons">
+          <a href="#"><img src="https://img.icons8.com/color/32/google-logo.png" alt="Google" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=G'" /></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/32/000000/facebook-new.png" alt="Facebook" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=F'" /></a>
+          <a href="#"><img src="https://img.icons8.com/ios-glyphs/32/github.png" alt="GitHub" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=Gh'" /></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/32/0077B5/linkedin.png" alt="LinkedIn" onerror="this.src='https://placehold.co/32x32/cccccc/ffffff?text=L'" /></a>
+        </div>
+        <div class="mobile-toggle" id="goToSignUp">Don't have an account? Sign Up</div>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="ghost" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start your journey with us</p>
+          <button class="ghost" id="signUp">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Message Box HTML -->
+  <div id="messageBox" class="message-box">
+    <span id="messageIcon" class="icon"></span>
+    <span id="messageText"></span>
+  </div>
+
+  <script>
+    // Get references to DOM elements
+    const container = document.getElementById('container');
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const goToSignUp = document.getElementById('goToSignUp');
+    const goToSignIn = document.getElementById('goToSignIn');
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
+    const messageBox = document.getElementById('messageBox');
+    const messageText = document.getElementById('messageText');
+    const messageIcon = document.getElementById('messageIcon');
+
+ 
+    function getUsers() {
+      const usersJson = localStorage.getItem('users');
+      return usersJson ? JSON.parse(usersJson) : [];
+    }
+
+ 
+    function saveUsers(usersArray) {
+      localStorage.setItem('users', JSON.stringify(usersArray));
+    }
+
+  
+    function showMessage(message, type) {
+      messageText.textContent = message;
+      messageBox.className = 'message-box show'; 
+      if (type === 'success') {
+        messageBox.classList.add('success');
+        messageIcon.innerHTML = '<i class="fas fa-check-circle"></i>'; 
+      } else if (type === 'error') {
+        messageBox.classList.add('error');
+        messageIcon.innerHTML = '<i class="fas fa-times-circle"></i>'; 
+      } else {
+        messageIcon.innerHTML = ''; 
+      }
+
+      
+      setTimeout(() => {
+        messageBox.classList.remove('show');
+      }, 3000);
+    }
+
+  
+    signUpButton.addEventListener('click', () => {
+      container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+      container.classList.remove("right-panel-active");
+    });
+
+   
+    goToSignUp.addEventListener('click', () => {
+      container.classList.add("right-panel-active");
+    });
+
+    goToSignIn.addEventListener('click', () => {
+      container.classList.remove("right-panel-active");
+    });
+
+ 
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault(); 
+
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const password = this.password.value.trim();
+
+      // Basic validation
+      if (!name || !email || !password) {
+        showMessage('Please fill in all fields.', 'error');
+        return;
+      }
+
+    
+      const nameRegex = /^[a-zA-Z\s]+$/;
+      if (!nameRegex.test(name)) {
+        showMessage('Name should only contain alphabetic characters and spaces.', 'error');
+        return;
+      }
+
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showMessage('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      
+      if (password.length < 8) {
+        showMessage('Password must be at least 8 characters long.', 'error');
+        return;
+      }
+
+      let users = getUsers();
+
+     
+      const userExists = users.some(user => user.email === email);
+      if (userExists) {
+        showMessage('This email is already registered. Please sign in.', 'error');
+        return;
+      }
+
+      // Add new user
+      users.push({ name, email, password });
+      saveUsers(users);
+
+      showMessage('Registration successful! Please sign in.', 'success');
+      // Automatically switch to sign-in panel after successful registration
+      container.classList.remove("right-panel-active");
+      registerForm.reset(); // Clear registration form fields
+    });
+
+    // Login Form Submission
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+
+      const email = this.email.value.trim();
+      const password = this.password.value.trim();
+
+      // Basic validation
+      if (!email || !password) {
+        showMessage('Please enter your email and password.', 'error');
+        return;
+      }
+
+      const users = getUsers();
+
+      // Find user by email and password
+      const foundUser = users.find(user => user.email === email && user.password === password);
+
+      if (foundUser) {
+        showMessage(`Welcome, ${foundUser.name}! You are logged in.`, 'success');
+        loginForm.reset(); // Clear login form fields
+        // In a real application, you would typically redirect the user to a dashboard
+         window.location.href = 'Form.html';
+      } else {
+        showMessage('Invalid email or password.', 'error');
+      }
+    });
+  </script>
+</body>
+</html>
